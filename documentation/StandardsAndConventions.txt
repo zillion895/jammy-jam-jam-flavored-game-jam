@@ -1,0 +1,659 @@
+================================================================
+		 GAME DEVELOPMENT CODING STANDARDS & CONVENTIONS
+					GDScript + C# | Godot Engine
+================================================================
+Version: 1.0
+Last Updated: 2026-05-02
+
+----------------------------------------------------------------
+TABLE OF CONTENTS
+----------------------------------------------------------------
+1.  General Principles                                  line  26
+2.  File & Folder Structure                             line  52
+3.  Using AI Tools for Formatting & Refactoring         line 114
+4.  Git & Version Control Conventions                   line 159
+5.  Programming Naming Conventions                      line 204
+6.  Variable Declarations                               line 263
+7.  Variable Declaration Order & Magic Numbers          line 288
+8.  Functions & Methods                                 line 364
+9.  Signals / Events                                    line 402
+10. Node & Scene Naming                                 line 427
+11. Comments & Documentation                            line 444
+12. Code Formatting                                     line 478
+13. Documentation Formatting Guide                      line 507
+
+----------------------------------------------------------------
+1. GENERAL PRINCIPLES
+----------------------------------------------------------------
+This document defines the general standards for our game:
+naming conventions, file structure, and commit messages.
+
+THE COMMANDMENTS
+  - Never push broken code or features. You can commit locally
+	as much as you want, but do NOT push until it works.
+
+  - If a folder has more than 5-10 files that don't relate to
+    each other, you are doing something wrong.
+
+    BAD:
+      characters/
+      ├── player.tscn
+      └── tree.tscn
+
+    GOOD:
+      characters/
+      └── player.tscn
+      trees/
+      └── tree.tscn
+
+  - Remove all debug print() statements before pushing.
+
+----------------------------------------------------------------
+2. FILE & FOLDER STRUCTURE
+----------------------------------------------------------------
+All paths are relative to the project root (res://).
+
+res://
+├── assets/
+│   ├── audio/
+│   │   ├── music/
+│   │   └── sfx/
+│   ├── fonts/
+│   ├── models/                <- Any models with UV-baked textures/
+│   │   │                         materials: place those textures with
+│   │   │                         the model in a folder named
+│   │   │                         [modelName]textures
+│   │   ├── characters/        <- Skeletal meshes. Divide into folders
+│   │   │   └── player/           and put associated animations in
+│   │   │       ├── model.obj      their own subfolder.
+│   │   │       └── animations/
+│   │   │           ├── anim1
+│   │   │           └── anim2
+│   │   └── environment/       <- Environment art. Categorize by object
+│   │                             type into folders, most generic first.
+│   └── sprites/
+│
+├── scenes/
+│   ├── characters/            <- Scene files live with their scripts
+│   ├── enemies/                  (co-located, not in scripts/)
+│   ├── levels/
+│   ├── ui/
+│   └── fx/
+│
+├── scripts/
+│   ├── autoloads/             <- Singletons / GameManager etc.
+│   ├── components/            <- Reusable component scripts
+│   ├── resources/             <- Custom Resource classes
+│   └── utils/                 <- Helper / utility scripts
+│
+├── shaders/
+├── documentation/             <- Use this to document your code and
+│                                 general use of every important feature.
+│                                 You may use AI to help generate docs.
+│
+└── data/                      <- JSON, CSV, or .tres data files
+
+SCENE & SCRIPT CO-LOCATION
+  Scripts that belong to a specific scene live next to that scene,
+  not in scripts/. The scripts/ folder is reserved for code that
+  is not tied to a single scene (autoloads, utilities, resources,
+  reusable components).
+
+    scenes/characters/
+    ├── player.tscn
+    └── playerController.gd    <- lives here, NOT in scripts/
+
+FILE NAMING
+  - GDScript files:   camelCase       playerController.gd
+  - C# script files:  PascalCase      PlayerController.cs
+  - Scene files:      camelCase       playerController.tscn
+  - Resource files:   camelCase       enemyStats.tres
+  - All other assets: camelCase
+
+----------------------------------------------------------------
+3. USING AI TOOLS FOR FORMATTING & REFACTORING
+----------------------------------------------------------------
+AI assistants (ChatGPT, Claude, Copilot, etc.) can be useful
+for reformatting code, renaming variables, and cleaning up
+structure to match these standards. However, AI makes mistakes
+and must always be verified before committing.
+
+PASTING THIS GUIDE TO AN AI
+  When asking an AI to format or refactor code, always paste
+  the relevant sections of this document as context first.
+
+  Suggested prompt structure:
+	"Here are our team's coding standards: [paste sections]
+	 Please reformat the following code to match them: [paste code]"
+
+  Good uses for AI formatting:
+    - Renaming variables/functions to match conventions
+    - Restructuring script layout to match declaration order
+    - Converting between GDScript and C# naming styles
+    - Adding type hints to untyped GDScript variables
+    - Generating doc comment stubs for public functions
+
+VERIFYING AI OUTPUT — REQUIRED BEFORE COMMITTING
+  Never blindly commit AI-reformatted code. Always check:
+
+  [ ] Naming matches conventions (camelCase vars, snake_case
+      functions, SCREAMING_SNAKE_CASE constants, etc.)
+  [ ] Declaration order is correct (constants -> enums ->
+      exports -> onready -> public -> private)
+  [ ] Type hints are present and correct (GDScript)
+  [ ] No magic numbers were introduced
+  [ ] Logic was not changed — AI can silently alter behavior
+	  while "cleaning up" code, especially in:
+        - conditionals and boolean logic
+        - loop bounds and off-by-one situations
+        - signal connections and node references
+  [ ] No hallucinated functions or methods that don't exist
+      in Godot's API
+  [ ] No debug prints or leftover comments were added
+  [ ] The code still runs and behaves as expected
+
+  When in doubt, do a manual diff against the original:
+    git diff
+
+----------------------------------------------------------------
+4. GIT & VERSION CONTROL CONVENTIONS
+----------------------------------------------------------------
+BRANCHES
+  main          <- Stable, always builds and runs
+  develop       <- Integration branch, reasonably stable
+  feature/xxx   <- New features    e.g. feature/inventory-system
+  fix/xxx       <- Bug fixes       e.g. fix/player-fall-through
+  art/xxx       <- Asset-only      e.g. art/new-enemy-sprites
+  refactor/xxx  <- Code cleanup with no behavior change
+
+COMMIT MESSAGES
+  Format: <type>: <short summary in present tense>
+
+  Types:
+    feat      New feature
+    fix       Bug fix
+    art       Art / asset update
+    refactor  Code change with no behavior change
+    docs      Documentation only
+    chore     Build, config, tooling changes
+    test      Tests only
+
+  Examples:
+    feat: add double-jump mechanic to player controller
+    fix: prevent enemy from spawning outside map bounds
+    art: update player walk animation frames
+    refactor: extract damage calculation into utility function
+
+  - Summary line: 72 chars max, no period at the end.
+  - Add a body for non-obvious changes (leave a blank line after
+    the summary).
+  - Reference issue numbers where applicable:
+
+      fix: resolve collision flicker on fast-moving projectiles
+
+      Closes #42. The issue was caused by physics process running
+      before the transform was fully applied.
+
+PULL REQUESTS
+  - Every PR must be reviewed by at least one other team member.
+  - PRs should be small and focused — one feature or fix per PR.
+  - The author resolves all merge conflicts before requesting review.
+  - Delete branches after merging.
+
+----------------------------------------------------------------
+5. PROGRAMMING NAMING CONVENTIONS
+----------------------------------------------------------------
+
+  CONCEPT                  GDSCRIPT                    C#
+  ----------------------------------------------------------------
+  Local variable           camelCase                   camelCase
+  Member variable          camelCase                   camelCase
+  Private member           _camelCase                  _camelCase
+  Constant                 SCREAMING_SNAKE_CASE        SCREAMING_SNAKE_CASE
+  Enum (name)              PascalCase                  PascalCase
+  Enum (values)            ALL_CAPS                    ALL_CAPS
+  Function / Method        snake_case                  snake_case
+  Class                    PascalCase                  PascalCase
+  Interface                N/A                         IPascalCase
+  Signal / Event           snake_case (past tense)     snake_case (past tense)
+  Node export              @export camelCase           [Export] camelCase
+
+  EXAMPLES
+  ----------------------------------------------------------------
+  Local / Member variable:
+    var playerHealth: int = 100                   // GDScript
+    int playerHealth = 100;                       // C#
+
+  Private member:
+    var _internalTimer: float = 0.0               // GDScript
+    private float _internalTimer = 0f;            // C#
+
+  Constant:
+    const MAX_SPEED: float = 300.0                // GDScript
+    public const float MAX_SPEED = 300f;          // C#
+
+  Enum:
+    enum State { IDLE, RUNNING, JUMPING, DEAD }   // GDScript
+    public enum State { IDLE, RUNNING, DEAD }     // C#
+
+  Function / Method:
+    func take_damage(amount: int) -> void:        // GDScript
+    public void take_damage(int amount) { }       // C#
+
+  Class:
+    class_name PlayerController                   // GDScript
+    public class PlayerController { }             // C#
+
+  Interface:
+    N/A                                           // GDScript
+    public interface IDamageable { }              // C#
+
+  Signal / Event:
+    signal health_changed(new_value: int)         // GDScript
+    public event Action<int> health_changed;      // C#
+
+  Node export:
+    @export var moveSpeed: float = 200.0          // GDScript
+    [Export] public float moveSpeed = 200f;       // C#
+
+  @onready (GDScript only):
+    @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+
+----------------------------------------------------------------
+6. VARIABLE DECLARATIONS
+----------------------------------------------------------------
+GDSCRIPT
+  - ALWAYS include type hints.
+      var speed: float = 150.0       <- GOOD
+      var speed = 150.0              <- AVOID
+
+  - Group related variables together with a blank line between
+    logical groups.
+
+C#
+  - Use explicit types unless the type is obvious from the
+    right-hand side (var is acceptable in that case).
+      var enemies = new List<Enemy>();   <- OK, type is obvious
+      float speed = 150f;               <- Preferred for primitives
+
+  - Prefer properties over public fields.
+  - Initialize fields at declaration when possible.
+
+BOOLEANS (both languages)
+  - Names should read as yes/no questions.
+      isGrounded, hasKey, canJump, shouldRespawn   <- GOOD
+      grounded, key, jump                          <- AVOID
+
+----------------------------------------------------------------
+7. VARIABLE DECLARATION ORDER & MAGIC NUMBERS
+----------------------------------------------------------------
+DECLARATION ORDER
+  Declare variables in this order at the top of every script:
+
+    1. class_name / extends / @tool
+    2. Constants
+    3. Enums
+    4. @export variables          <- Shows in Godot Inspector
+    5. @onready variables
+    6. Public member variables
+    7. Private member variables (_prefixed)
+    8. Methods begin below
+
+  GDScript example:
+    class_name PlayerController
+    extends CharacterBody2D
+
+    const MAX_SPEED: float = 300.0
+    const JUMP_FORCE: float = -500.0
+
+    enum WeaponType { SWORD, BOW, STAFF, NONE }
+
+    @export var moveSpeed: float = 150.0
+    @export var maxHealth: int = 100
+	@export_group("Combat")
+    @export var attackDamage: float = 10.0
+
+    @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+
+    var currentHealth: int = 100
+    var _internalTimer: float = 0.0
+
+  C# example:
+    public class PlayerController : CharacterBody2D
+    {
+        public const float MAX_SPEED = 300f;
+        public const float JUMP_FORCE = -500f;
+
+        public enum WeaponType { SWORD, BOW, STAFF, NONE }
+
+        [Export] public float moveSpeed = 150f;
+        [Export] public int maxHealth = 100;
+		[ExportGroup("Combat")]
+        [Export] public float attackDamage = 10f;
+
+        public int currentHealth = 100;
+        private float _internalTimer = 0f;
+    }
+
+MAGIC NUMBERS
+  Never use raw numbers directly in logic. Always assign them
+  to a named constant first.
+
+    health -= FALL_DAMAGE       <- GOOD: intent is clear
+    health -= 10                <- BAD:  where does 10 come from?
+
+    if speed > MAX_SPEED:       <- GOOD
+    if speed > 300:             <- BAD
+
+  Group related constants together near the top of the file so
+  they are easy to find and adjust.
+
+  Use enums instead of multiple integer constants when the values
+  represent a set of related states or categories.
+
+    # BAD
+    const WEAPON_SWORD: int = 0
+    const WEAPON_BOW:   int = 1
+    const WEAPON_STAFF: int = 2
+
+    # GOOD
+    enum WeaponType { SWORD, BOW, STAFF, NONE }
+    var equipped: WeaponType = WeaponType.NONE
+
+----------------------------------------------------------------
+8. FUNCTIONS & METHODS
+----------------------------------------------------------------
+  - Functions do ONE thing. If you need "and" to describe it,
+    split it.
+  - Keep functions under ~40 lines. If longer, refactor.
+  - Parameters: snake_case (GDScript) / camelCase (C#).
+  - Return types must always be declared (GDScript type hints,
+    C# return type).
+
+  GDScript:
+    func calculate_damage(base: float, multiplier: float) -> float:
+        return base * multiplier
+
+  C#:
+    private float calculate_damage(float baseDamage, float multiplier){
+        return baseDamage * multiplier;
+    }
+
+GODOT BUILT-IN OVERRIDE ORDER (GDScript)
+  Always structure a script in this order:
+
+    1.  class_name
+    2.  @tool / @icon
+    3.  extends
+    4.  Constants
+    5.  Enums
+    6.  @export variables
+    7.  @onready variables
+    8.  Other member variables
+    9.  _init()
+    10. _ready()
+    11. _process() / _physics_process()
+    12. Input handlers (_input, _unhandled_input)
+    13. Public methods
+    14. Private methods (_prefixed)
+    15. Signal callbacks (_on_[node]_[signal])
+
+----------------------------------------------------------------
+9. SIGNALS / EVENTS
+----------------------------------------------------------------
+  - Prefer signals/events over direct node references for
+    cross-node communication.
+
+  - Signal names use past tense to indicate something happened:
+      signal player_died
+      signal score_updated(new_score: int)
+
+  - Connected callback functions follow this naming pattern:
+      _on_[emitter]_[signal_name]
+      e.g. _on_player_health_changed(newValue: int)
+
+  GDScript:
+    signal health_changed(newValue: int)
+    signal enemy_defeated
+
+  C#:
+    public event Action on_player_died;
+    public event Action<int> on_score_updated;
+
+  Callback naming (C#):
+    private void on_player_died() { ... }
+
+----------------------------------------------------------------
+10. NODE & SCENE NAMING
+----------------------------------------------------------------
+  - Scene tree node names: PascalCase (Godot default)
+      Player, EnemySpawner, MainCamera, HUDLayer
+
+  - Nodes that represent a collection get plural names:
+      Enemies    (Node2D containing enemy instances)
+      Projectiles
+
+  - Use descriptive names. Avoid generic names like Node2D,
+    Sprite, or Area unless they are truly generic utilities.
+
+  - Autoloads (singletons) are PascalCase and end with
+	"Manager", "System", or "Service" where appropriate:
+      GameManager, AudioManager, SaveSystem, InputService
+
+----------------------------------------------------------------
+11. COMMENTS & DOCUMENTATION
+----------------------------------------------------------------
+  - Write comments that explain WHY, not WHAT. The code already
+    shows what is happening; comments explain intent, caveats,
+    or non-obvious logic.
+
+    # BAD: increment the counter
+    counter += 1
+
+    # GOOD: compensate for the off-by-one in Godot's tile index
+    counter += 1
+
+  - Every public function/method gets a brief doc comment.
+
+  GDScript:
+    ## Applies damage to the entity and triggers death if HP <= 0.
+    ## [param amount] must be a positive integer.
+    func take_damage(amount: int) -> void:
+
+  C# (XML docs):
+    /// <summary>
+    /// Applies damage to the entity. Triggers death if HP hits zero.
+    /// </summary>
+	/// <param name="amount">Must be a positive value.</param>
+    public void take_damage(int amount) { }
+
+  - Use TODO, FIXME, HACK tags consistently:
+      # TODO: replace with object pool when profiling confirms need
+      # FIXME: breaks when player moves faster than 400 u/s
+      # HACK: workaround for Godot issue #12345, remove after update
+
+  - Do NOT leave commented-out code in commits. Use git history.
+
+----------------------------------------------------------------
+12. CODE FORMATTING
+----------------------------------------------------------------
+GDSCRIPT
+  - Indentation: Tabs (Godot default).
+  - Max line length: 100 characters.
+  - One blank line between functions.
+  - Two blank lines between major sections (exports, variables,
+    methods).
+  - Space after commas and around operators:
+      var result: float = baseValue * 2.0 + offset   <- GOOD
+      var result:float=baseValue*2.0+offset           <- BAD
+
+C#
+  - Indentation: Tabs.
+  - Brace style: opening brace on the same line:
+      public void take_damage(int amount){
+          health -= amount;
+      }
+  - Max line length: 120 characters.
+  - One blank line between methods.
+
+BOTH
+  - Trailing whitespace is allowed where it improves readability
+    by visually separating logical groups of code.
+  - Files end with a single newline.
+  - Use an .editorconfig file at the project root to enforce
+    these settings automatically across the team.
+
+----------------------------------------------------------------
+13. DOCUMENTATION FORMATTING GUIDE
+----------------------------------------------------------------
+AI tools may be used to help generate documentation. Always
+verify accuracy before committing — see section 3.
+
+PURPOSE
+  The documentation/ directory is for documenting important
+  systems, features, and non-obvious code decisions that would
+  take another developer significant time to figure out on their
+  own. It is NOT for documenting every script — only things
+  complex enough to warrant explanation.
+
+  Not everything needs to follow this format exactly, but all
+  important features and gameplay systems should have a doc.
+
+  Good candidates for documentation:
+    - Core game systems (inventory, save/load, combat, dialogue)
+    - Non-obvious architectural decisions and why they were made
+    - Any system another developer will need to interface with
+    - Workarounds or hacks that aren't self-explanatory
+    - Data formats (JSON structures, .tres schemas, etc.)
+
+FOLDER STRUCTURE
+  documentation/
+  ├── systems/           <- Core game systems
+  ├── architecture/      <- High-level structure & decisions
+  ├── data-formats/      <- JSON, .tres, CSV schemas
+  └── guides/            <- How-to guides for the team
+
+FILE NAMING
+  - All doc files: camelCase .txt
+      inventorySystem.txt
+      saveLoadSystem.txt
+      enemyAiOverview.txt
+
+DOCUMENT FORMAT
+  Follow this template for all files in documentation/.
+
+  ================================================================
+  [SYSTEM / FEATURE NAME IN CAPS]
+  ================================================================
+  Author:       [name]
+  Last Updated: [YYYY-MM-DD]
+  Related Files:
+    scenes/ui/inventoryMenu.tscn
+    scenes/characters/playerController.gd
+
+  ----------------------------------------------------------------
+  OVERVIEW
+  ----------------------------------------------------------------
+  One short paragraph explaining what this system does and why
+  it exists. Write for someone who has never seen this code.
+
+  ----------------------------------------------------------------
+  HOW IT WORKS
+  ----------------------------------------------------------------
+  Explain the core logic in plain language. Use sub-sections
+  for distinct parts. Keep it high level — the code handles
+  the detail, this explains the intent.
+
+  SUB-SECTION NAME
+    Explain this part of the system here. Reference specific
+    files or nodes where helpful.
+
+      Example or pseudocode can go here if it helps clarity.
+
+  ----------------------------------------------------------------
+  INTERFACING WITH THIS SYSTEM
+  ----------------------------------------------------------------
+  How does another developer actually use this? Signals to
+  listen to, methods to call, nodes to reference.
+
+    # Dealing damage through the combat system
+    CombatManager.apply_damage(target, 25, DamageType.FIRE)
+
+    # Listening for death
+    signal enemy_died(enemy: EnemyBase)
+
+  ----------------------------------------------------------------
+  KNOWN ISSUES / LIMITATIONS
+  ----------------------------------------------------------------
+  Anything incomplete, fragile, or likely to confuse someone.
+  Link to a fix/xxx branch or issue number if one exists.
+
+    - Does not currently handle simultaneous hits in the same
+      physics frame. See fix/combat-simultaneous-hits.
+
+  ----------------------------------------------------------------
+  CHANGE LOG
+  ----------------------------------------------------------------
+  [YYYY-MM-DD] [author] - Brief description of what changed
+
+  ================================================================
+  END OF DOCUMENT
+  ================================================================
+
+EXAMPLE: documentation/systems/combatSystem.txt
+  ================================================================
+  COMBAT SYSTEM
+  ================================================================
+  Author:       Jamie
+  Last Updated: 2026-05-02
+  Related Files:
+    scripts/autoloads/CombatManager.gd
+    scripts/resources/damageData.gd
+    scenes/characters/playerController.gd
+
+  ----------------------------------------------------------------
+  OVERVIEW
+  ----------------------------------------------------------------
+  The combat system handles all damage calculation, hit detection,
+  and death events. It is implemented as a singleton (CombatManager)
+  so any node can deal or receive damage without needing a direct
+  reference to the target's script.
+
+  ----------------------------------------------------------------
+  HOW IT WORKS
+  ----------------------------------------------------------------
+  DAMAGE PIPELINE
+    When damage is applied, CombatManager:
+      1. Receives the call with a target, amount, and DamageType
+      2. Looks up any resistances on the target
+      3. Calculates final damage and calls take_damage() on target
+      4. Emits damage_applied signal for UI and effects to react to
+
+  ----------------------------------------------------------------
+  INTERFACING WITH THIS SYSTEM
+  ----------------------------------------------------------------
+    # Apply damage from anywhere
+    CombatManager.apply_damage(target, 25, DamageType.FIRE)
+
+    # Listen for damage events (e.g. in a health bar script)
+    CombatManager.damage_applied.connect(_on_damage_applied)
+
+  ----------------------------------------------------------------
+  KNOWN ISSUES / LIMITATIONS
+  ----------------------------------------------------------------
+    - Simultaneous hits in the same physics frame are not handled.
+      See fix/combat-simultaneous-hits.
+
+  ----------------------------------------------------------------
+  CHANGE LOG
+  ----------------------------------------------------------------
+    2026-05-02  Jamie  - Initial documentation
+    2026-04-10  Jamie  - Added DamageType resistance lookup
+
+  ================================================================
+  END OF DOCUMENT
+  ================================================================
+
+================================================================
+END OF DOCUMENT
+================================================================
