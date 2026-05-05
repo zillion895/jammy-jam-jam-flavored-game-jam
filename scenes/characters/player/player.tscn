@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7uws0"]
 height = 1.418457
 
-[node name="player" type="CharacterBody3D" unique_id=1842708771]
+[node name="player" type="CharacterBody3D" unique_id=1842708771 groups=["player"]]
 script = SubResource("GDScript_bcx1r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=981220878]
