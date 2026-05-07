@@ -52,3 +52,16 @@ shape = SubResource("CapsuleShape3D_7uws0")
 [node name="orientation" type="Node3D" parent="." unique_id=418270605]
 
 [node name="art goes here remove this when redundant" type="Node" parent="orientation" unique_id=953085044]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="orientation" unique_id=1036741599]
+transform = Transform3D(0.99999946, -0.00078569364, -0.00036852338, 0.0009523326, 0.8239602, -0.0033012521, 0.0003716635, 0.0027198263, 0.9999945, 0, -0.13098149, 0)
+mesh = SubResource("CapsuleMesh_7uws0")
+
+[node name="camRoot" type="Node3D" parent="." unique_id=1304933001]
+transform = Transform3D(0.70710677, -0.3535534, 0.61237246, 0, 0.8660254, 0.5, -0.70710677, -0.3535534, 0.61237246, 0, 0, 0)
+
+[node name="camera" type="Camera3D" parent="camRoot" unique_id=1111050798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+fov = 21.8
+size = 8.477
+near = 0.005
