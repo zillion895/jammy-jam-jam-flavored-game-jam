@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://hh8wm88kauxc"]
 
 [ext_resource type="PackedScene" uid="uid://m3ebc0xgd1aq" path="res://scenes/characters/player/player.tscn" id="1_l2lb8"]
+[ext_resource type="PackedScene" uid="uid://cbyk5reu46bsw" path="res://scenes/Machines/Machine.tscn" id="2_h722u"]
 
 [node name="MainLevel" type="Node3D" unique_id=1231150597]
 
@@ -40,3 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, -2)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2054093152]
 transform = Transform3D(0.9659258, -0.18301266, 0.18301266, -1.7824057e-08, 0.70710695, 0.7071067, -0.25881928, -0.6830126, 0.68301284, 0, 0, 0)
 shadow_enabled = true
+
+[node name="Machine" parent="." unique_id=895359428 instance=ExtResource("2_h722u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0227307, -4.922786)
