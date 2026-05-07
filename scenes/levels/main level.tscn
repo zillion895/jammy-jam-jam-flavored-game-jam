@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://b0ixi1b60to"]
+
+[ext_resource type="PackedScene" uid="uid://m3ebc0xgd1aq" path="res://scenes/characters/player/player.tscn" id="1_w1o5y"]
+
+[node name="MainLevel" type="Node3D" unique_id=1167970471]
+
+[node name="player" parent="." unique_id=1842708771 instance=ExtResource("1_w1o5y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08522272, 3.31347, -0.2693627)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=985985602]
+transform = Transform3D(0.9140241, 0, 0, 0, 0.9140241, 0, 0, 0, 0.9140241, 0, 0, 0)
+use_collision = true
+size = Vector3(26, 1, 29)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="." unique_id=660730833]
+transform = Transform3D(9.383001, 0, 0, 0, 0.9140241, 0, 0, 0, 7.6948786, 0, -0.5510111, 0)
+use_collision = true
+size = Vector3(26, 1, 29)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1654331756]
+transform = Transform3D(0.43873158, 0, 0, 0, 0.9140241, 0, 0, 0, 0.9140241, -11.672745, 1.8280482, 0)
+use_collision = true
+size = Vector3(1, 5, 29)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=803446269]
+transform = Transform3D(0.9140241, 0, 0, 0, 0.9140241, 0, 0, 0, 0.45701206, 8.683229, 1.8280482, -4.8081384)
+use_collision = true
+size = Vector3(7, 5, 1)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=1632187039]
+transform = Transform3D(0.9140241, 0, 0, 0, 0.9140241, 0, 0, 0, 0.45701206, 4.113109, 3.6560965, -4.8081384)
+use_collision = true
+size = Vector3(3, 1, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=154020613]
+transform = Transform3D(0.9140241, 0, 0, 0, 0.9140241, 0, 0, 0, 0.45701206, -4.570121, 1.8280482, -4.8081384)
+use_collision = true
+size = Vector3(16, 5, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=238250048]
+transform = Transform3D(0.54841447, 0, 0, 0, 0.9140241, 0, 0, 0, 0.9140241, -3.1990843, 1.8280482, -3.1990843)
+use_collision = true
+size = Vector3(1, 5, 4)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="." unique_id=1174887883]
+transform = Transform3D(0.54841447, 0, 0, 0, 0.9140241, 0, 0, 0, 0.9140241, -3.1990843, 3.6560965, 1.1920929e-07)
+use_collision = true
+size = Vector3(1, 1, 3)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="." unique_id=644644578]
+transform = Transform3D(0.54841447, 0, 0, 0, 0.9140241, 0, 0, 0, 0.9140241, -3.1990843, 1.8280482, 7.312193)
+use_collision = true
+size = Vector3(1, 5, 13)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=2105987490]
+transform = Transform3D(0.9140241, 0, 0, 0, 0.9140241, 0, 0, 0, 0.45701206, 0, 1.8280482, -13.0314045)
+use_collision = true
+size = Vector3(26, 5, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1528720521]
+transform = Transform3D(1, 0, 0, 0, 0.4607885, 0.88751, 0, -0.88751, 0.4607885, 0, 8.325411, 0)
