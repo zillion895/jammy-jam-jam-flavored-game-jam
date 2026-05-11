@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cbyk5reu46bsw"]
+
+[ext_resource type="Script" uid="uid://b66ovhr1od4le" path="res://scenes/Machines/machineScript.gd" id="1_o31v7"]
+[ext_resource type="PackedScene" uid="uid://c77wwlqlaaxhg" path="res://scenes/Interactions/interactField.tscn" id="2_m2hrj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v0h0t"]
+
+[node name="Machine" type="MeshInstance3D" unique_id=895359428]
+mesh = SubResource("BoxMesh_v0h0t")
+script = ExtResource("1_o31v7")
+
+[node name="InteractField" parent="." unique_id=1028010130 instance=ExtResource("2_m2hrj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=758285575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79444647, 0)
+pixel_size = 0.02
+offset = Vector2(0, 13.185)
+text = "Fix Me"
+
+[node name="Timer" type="Timer" parent="." unique_id=218322371]
+wait_time = 5.0
+autostart = true
