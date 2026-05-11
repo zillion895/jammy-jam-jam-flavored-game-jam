@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://keoq6komxp2b"]
+
+[ext_resource type="Script" uid="uid://c8datnqkq36go" path="res://scenes/door/Door.cs" id="1_bu3y2"]
+
+[node name="Door" type="Node3D" unique_id=1466096162]
+script = ExtResource("1_bu3y2")
+
+[node name="model" type="Node3D" parent="." unique_id=1227134078]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="model" unique_id=525784136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49623203, 0)
+size = Vector3(0.671875, 1, 0.10058594)

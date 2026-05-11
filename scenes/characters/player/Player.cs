@@ -30,8 +30,6 @@ public partial class Player : CharacterBody3D
         {
             velocity.X = Mathf.MoveToward(velocity.X, direction.X * speed, WALKING_CONVERGENCE_SPEED);
             velocity.Z = Mathf.MoveToward(velocity.Z, direction.Z * speed, WALKING_CONVERGENCE_SPEED);
-            GD.Print(velocity.X);
-            GD.Print(velocity.Y);
         }
         else
         {
