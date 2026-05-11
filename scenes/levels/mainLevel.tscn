@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://m3ebc0xgd1aq" path="res://scenes/characters/player/player.tscn" id="1_l2lb8"]
 [ext_resource type="PackedScene" uid="uid://cbyk5reu46bsw" path="res://scenes/Machines/Machine.tscn" id="2_h722u"]
+[ext_resource type="PackedScene" uid="uid://dwntld80w4abg" path="res://scripts/components/Health Bar/healthBar.tscn" id="3_obtf8"]
 
 [node name="MainLevel" type="Node3D" unique_id=1231150597]
 
@@ -44,3 +45,5 @@ shadow_enabled = true
 
 [node name="Machine" parent="." unique_id=895359428 instance=ExtResource("2_h722u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0227307, -4.922786)
+
+[node name="HealthBar" parent="." unique_id=352033512 instance=ExtResource("3_obtf8")]
