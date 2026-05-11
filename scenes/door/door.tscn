@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://keoq6komxp2b"]
 
 [ext_resource type="Script" uid="uid://c8datnqkq36go" path="res://scenes/door/Door.cs" id="1_bu3y2"]
+[ext_resource type="PackedScene" uid="uid://c77wwlqlaaxhg" path="res://scenes/Interactions/interactField.tscn" id="2_odsy8"]
 
 [node name="Door" type="Node3D" unique_id=1466096162]
 script = ExtResource("1_bu3y2")
@@ -9,4 +10,13 @@ script = ExtResource("1_bu3y2")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="model" unique_id=525784136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49623203, 0)
+use_collision = true
 size = Vector3(0.671875, 1, 0.10058594)
+
+[node name="InteractField" parent="." unique_id=1028010130 instance=ExtResource("2_odsy8")]
+transform = Transform3D(1, 0, 0, 0, 1.9107635, 0, 0, 0, 1, 0, 0.14774394, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="endPoint" type="Node3D" parent="." unique_id=269475038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5160481, 0)
