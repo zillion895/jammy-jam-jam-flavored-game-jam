@@ -9,9 +9,9 @@ script = ExtResource("1_bu3y2")
 [node name="model" type="Node3D" parent="." unique_id=1227134078]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="model" unique_id=525784136]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49623203, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.044, 0)
 use_collision = true
-size = Vector3(0.671875, 1, 0.10058594)
+size = Vector3(1.5315247, 2.0952148, 0.10058594)
 
 [node name="InteractField" parent="." unique_id=1028010130 instance=ExtResource("2_odsy8")]
 transform = Transform3D(1, 0, 0, 0, 1.9107635, 0, 0, 0, 1, 0, 0.14774394, 0)
@@ -19,4 +19,4 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="endPoint" type="Node3D" parent="." unique_id=269475038]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5160481, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7761759, 0.0020017624, 0)

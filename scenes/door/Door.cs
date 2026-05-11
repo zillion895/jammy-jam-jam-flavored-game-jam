@@ -29,14 +29,14 @@ public partial class Door : Node3D
 	{
 		GD.Print("open");
 		Tween tween = CreateTween();
-		tween.TweenProperty(door, "position", endPoint.Position, 1f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
+		tween.TweenProperty(door, "position", endPoint.Position, 0.3f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
 		tween.TweenCallback(Callable.From(() => close())).SetDelay(2f);
 	}
 
 	public void close()
 	{
 		Tween tween = CreateTween();
-		tween.TweenProperty(door, "position", startPoint, 1f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
+		tween.TweenProperty(door, "position", startPoint, 0.3f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
 	}
 }
 		
