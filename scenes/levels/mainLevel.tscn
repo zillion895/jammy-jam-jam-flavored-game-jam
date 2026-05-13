@@ -14,9 +14,9 @@ use_collision = true
 size = Vector3(11, 1, 10)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=2980309]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.217224, 0, -24.720459)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -11.5)
 use_collision = true
-size = Vector3(27.434448, 1, 36.440918)
+size = Vector3(11, 1, 10)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1580413639]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.3846874, -16)
@@ -67,11 +67,11 @@ transform = Transform3D(2.134025, 0, 0, 0, 1.6184411, 0, 0, 0, 1.2890875, -0.541
 [node name="Cat" parent="." unique_id=331300759 instance=ExtResource("5_8v80i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.472666, 1.5, 0.21990919)
 
-[node name="Cat" parent="Cat" unique_id=1198968411 instance=ExtResource("5_8v80i")]
+[node name="Cat2" parent="Cat" unique_id=1198968411 instance=ExtResource("5_8v80i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4539618, 0.23050284, -2.5326796)
 
 [node name="Cat2" parent="." unique_id=1532155729 instance=ExtResource("5_8v80i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.472666, 1.712935, 2.7194614)
 
-[node name="Cat" parent="Cat2" unique_id=1851487857 instance=ExtResource("5_8v80i")]
+[node name="Cat2" parent="Cat2" unique_id=1851487857 instance=ExtResource("5_8v80i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4539618, 0.23050284, -2.5326796)

@@ -1,15 +1,19 @@
 [gd_scene format=3 uid="uid://ck7n5le3va3ad"]
 
 [ext_resource type="Script" uid="uid://cwyn1uwgnbwem" path="res://scenes/characters/CatColect.cs" id="1_ev7rg"]
+[ext_resource type="ArrayMesh" uid="uid://cfw7tnltqvfxw" path="res://assets/models/characters/Cat.obj" id="2_43gcw"]
+[ext_resource type="Texture2D" uid="uid://cjtknvclv3npt" path="res://assets/models/textures/cat/Cat_diffuse.jpg" id="3_udfqm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ev7rg"]
 friction = 5.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w70mx"]
+albedo_texture = ExtResource("3_udfqm")
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_goy8l"]
+height = 1.0224609
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ev7rg"]
-
-[node name="Cat" type="Node3D" unique_id=331300759]
+[node name="Cat" type="Node3D" unique_id=331300759 groups=["cat"]]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1205694025]
 collision_layer = 5
@@ -21,8 +25,11 @@ mass = 2.28
 physics_material_override = SubResource("PhysicsMaterial_ev7rg")
 script = ExtResource("1_ev7rg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=416331222]
-shape = SubResource("CapsuleShape3D_goy8l")
+[node name="Cat" type="MeshInstance3D" parent="RigidBody3D" unique_id=310348476]
+transform = Transform3D(0.025, 0, 0, 0, -1.0927848e-09, 0.025, 0, -0.025, -1.0927848e-09, 0, -1, 0)
+mesh = ExtResource("2_43gcw")
+surface_material_override/0 = SubResource("StandardMaterial3D_w70mx")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1172423078]
-mesh = SubResource("CapsuleMesh_ev7rg")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=416331222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48876953, 0)
+shape = SubResource("CapsuleShape3D_goy8l")
