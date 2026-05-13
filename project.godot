@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 InteractionManager="*uid://dithxaq7j5xdo"
-HealthBar="*uid://dwntld80w4abg"
 
 [dotnet]
 

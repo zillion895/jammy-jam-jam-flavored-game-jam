@@ -16,7 +16,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79444647, 0)
 pixel_size = 0.02
 offset = Vector2(0, 13.185)
-text = "Fixed"
+text = "Working"
 
 [node name="Timer" type="Timer" parent="." unique_id=218322371]
 wait_time = 5.0
