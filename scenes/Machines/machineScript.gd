@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
 @onready var InteractField = $InteractField
-@onready var HealthBar = $"/root/HealthBar"
+@onready var HealthBar = get_parent().get_node("HealthBar")
 @onready var label = $Label3D
 @onready var timer = $Timer
 
@@ -12,20 +12,16 @@ func _ready() -> void:
 	InteractField.interact = Callable(self, "_fix")
 
 func _on_timer_timeout():
-	print("Timer")
 	if operational == true:
-		_break()
+		HealthBar.value += 1
 	else:
-		print("damage")
 		HealthBar.value -= 1
 
 func _fix():
-	label.text = "Fixed"
-	print("fix")
+	label.text = "Working"
 	operational = true
 	
 func _break():
-		print("Break")
 		operational = false
 		label.text = "Fix Me"
 	
