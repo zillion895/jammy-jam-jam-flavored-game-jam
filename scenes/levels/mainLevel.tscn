@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dwntld80w4abg" path="res://scripts/components/Health Bar/healthBar.tscn" id="3_obtf8"]
 [ext_resource type="PackedScene" uid="uid://keoq6komxp2b" path="res://scenes/door/door.tscn" id="4_0tugg"]
 [ext_resource type="PackedScene" uid="uid://ck7n5le3va3ad" path="res://scenes/characters/cat.tscn" id="5_8v80i"]
+[ext_resource type="PackedScene" uid="uid://sfkxpy5k06d5" path="res://scenes/jail/jail.tscn" id="6_d8m87"]
 
 [node name="MainLevel" type="Node3D" unique_id=1231150597]
 
@@ -14,9 +15,9 @@ use_collision = true
 size = Vector3(11, 1, 10)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=2980309]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -11.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8721466, 0, -23.002014)
 use_collision = true
-size = Vector3(11, 1, 10)
+size = Vector3(26.744293, 1, 33.00403)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1580413639]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.3846874, -16)
@@ -75,3 +76,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.472666, 1.712935, 2.7194614
 
 [node name="Cat2" parent="Cat2" unique_id=1851487857 instance=ExtResource("5_8v80i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4539618, 0.23050284, -2.5326796)
+
+[node name="Jail" parent="." unique_id=890411712 instance=ExtResource("6_d8m87")]
+transform = Transform3D(1.7922139, 0, 0, 0, 1.6486049, 0, 0, 0, 1.9062152, 8.763194, 0.7786679, -22.359734)

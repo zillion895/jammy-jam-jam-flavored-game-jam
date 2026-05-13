@@ -176,4 +176,10 @@ public partial class CatColect : RigidBody3D
 			}
 		}
 	}
+
+	public void BreakRope()
+	{
+		ropeMesh.Visible = false;
+		isAttracting = false;
+	}
 }
