@@ -6,6 +6,8 @@ public partial class Player : CharacterBody3D
     private const float speed = 8.0f;
     private const float CONVERGENCE_SPEED = 0.8f;
     private const float WALKING_CONVERGENCE_SPEED = 0.5f;
+
+    private const float RUN_VELOCITY = 12f;
     private float axisX;
     private float axisY;
     private Node3D cameraRoot;
@@ -28,14 +30,20 @@ public partial class Player : CharacterBody3D
         Vector3 direction = (cameraRoot.Transform.Basis * new Vector3(axisX, 0, axisY)).Normalized();
         if (direction != Vector3.Zero)
         {
-            velocity.X = Mathf.MoveToward(velocity.X, direction.X * speed, WALKING_CONVERGENCE_SPEED);
-            velocity.Z = Mathf.MoveToward(velocity.Z, direction.Z * speed, WALKING_CONVERGENCE_SPEED);
+            float targetSpeed = Input.IsKeyPressed(Key.Shift) ? RUN_VELOCITY : speed;
+            if (Input.IsKeyPressed(Key.Shift))
+            {
+                GD.Print("Running");
+            }
+            velocity.X = Mathf.MoveToward(velocity.X, direction.X * targetSpeed, WALKING_CONVERGENCE_SPEED);
+            velocity.Z = Mathf.MoveToward(velocity.Z, direction.Z * targetSpeed, WALKING_CONVERGENCE_SPEED);
         }
         else
         {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, CONVERGENCE_SPEED);
             velocity.Z = Mathf.MoveToward(Velocity.Z, 0, CONVERGENCE_SPEED);
         }
+        
 
         Velocity = velocity;
         MoveAndSlide();
