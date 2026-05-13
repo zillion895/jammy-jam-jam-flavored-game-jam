@@ -9,10 +9,12 @@ public partial class CatColect : RigidBody3D
 	private bool isAttracting = false;
 	private bool spaceWasPressed = false;
 	private float attractionStrength = 50f;
-	private float minDistance = 5f;
+	private float minDistance = 4f;
 	private float machineMinDistance = 2f;
-	private float repelDistance = 3f;
+	private float repelDistance = 2f;
 	private MeshInstance3D ropeMesh;
+	private float directionChangeTimer = 0f;
+	private Vector3 currentRandomDir;
 
 	public override void _Ready()
 	{
@@ -26,6 +28,7 @@ public partial class CatColect : RigidBody3D
 		// Set damping and low friction to prevent sticking
 		this.LinearDamp = 5f;
 		this.PhysicsMaterialOverride = new PhysicsMaterial { Friction = 0.1f };
+		this.AddToGroup("cats");
 
 		detectionArea = new Area3D();
 		detectionArea.CollisionLayer = 2;
@@ -42,6 +45,8 @@ public partial class CatColect : RigidBody3D
 		ropeMesh.Mesh = new CylinderMesh { Height = 1, TopRadius = 0.05f, BottomRadius = 0.05f };
 		AddChild(ropeMesh);
 		ropeMesh.Visible = false;
+
+		currentRandomDir = new Vector3((float)Random.Shared.NextDouble() * 2 - 1, 0, (float)Random.Shared.NextDouble() * 2 - 1).Normalized();
 	}
 
 	private void OnBodyEntered(Node3D body)
@@ -151,8 +156,22 @@ public partial class CatColect : RigidBody3D
 				}
 				if (nearestMachine != null && minDist > machineMinDistance)
 				{
-					Vector3 direction = (nearestMachine.GlobalPosition - GlobalPosition).Normalized();
-					ApplyCentralForce(direction * attractionStrength);
+					if (minDist > 15f)
+					{
+						// Run in random direction, change every second
+						directionChangeTimer -= (float)delta;
+						if (directionChangeTimer <= 0)
+						{
+							currentRandomDir = new Vector3((float)Random.Shared.NextDouble() * 2 - 1, 0, (float)Random.Shared.NextDouble() * 2 - 1).Normalized();
+							directionChangeTimer = 1f;
+						}
+						ApplyCentralForce(currentRandomDir * attractionStrength);
+					}
+					else
+					{
+						Vector3 direction = (nearestMachine.GlobalPosition - GlobalPosition).Normalized();
+						ApplyCentralForce(direction * attractionStrength);
+					}
 				}
 			}
 		}
