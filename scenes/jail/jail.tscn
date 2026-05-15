@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://sfkxpy5k06d5"]
 
 [ext_resource type="Script" uid="uid://j3vlheiesiwy" path="res://scenes/jail/Jail.cs" id="1_bgm5n"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_5h5vu"]
+[ext_resource type="PackedScene" uid="uid://cugdhgoyrrgh4" path="res://scenes/jail/test.tscn" id="2_5h5vu"]
 
 [node name="Jail" type="Node3D" unique_id=890411712]
 script = ExtResource("1_bgm5n")
@@ -13,6 +12,4 @@ transform = Transform3D(5, 0, 0, 0, 2.285, 0, 0, 0, 4.058, 0, 0, 0)
 [node name="vacuum" type="Node3D" parent="." unique_id=152099279]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5173037, 0.9836819, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="vacuum" unique_id=926871636]
-transform = Transform3D(-4.279038e-08, 0.33690503, 0, -0.97892976, -1.4726587e-08, 0, 0, 0, 1, -0.48972678, 0, 0)
-mesh = SubResource("CylinderMesh_5h5vu")
+[node name="Test" parent="vacuum" unique_id=1369971933 instance=ExtResource("2_5h5vu")]

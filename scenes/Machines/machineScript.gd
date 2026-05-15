@@ -27,14 +27,14 @@ func _is_cat_body(body: Node) -> bool:
 
 func _on_timer_timeout():
 	print("Time")
-	print(cats_touching)
+	print(HealthBar.value)
 	if cats_touching > 0:
 		_break()
 	
 	if operational == true:
 		HealthBar.value += 1
 	else:
-		HealthBar.value -= 1
+		HealthBar.value -= 5
 
 func _on_interact_field_body_entered(body: Node3D) -> void:
 	if _is_cat_body(body):
