@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ct4gatbbo5gl8"]
+
+[node name="ControlUi" type="Label" unique_id=1262890706]
+text = "Press \"E\" to open doors and fix machines
+Press \"Space\" to pick up cats"

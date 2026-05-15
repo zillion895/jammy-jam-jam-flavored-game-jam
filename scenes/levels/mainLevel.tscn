@@ -2,8 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://m3ebc0xgd1aq" path="res://scenes/characters/player/player.tscn" id="1_l2lb8"]
 [ext_resource type="PackedScene" uid="uid://cbyk5reu46bsw" path="res://scenes/Machines/Machine.tscn" id="2_h722u"]
+[ext_resource type="PackedScene" uid="uid://ct4gatbbo5gl8" path="res://scripts/components/BasicUI/Control UI.tscn" id="3_a0myi"]
 [ext_resource type="PackedScene" uid="uid://dwntld80w4abg" path="res://scripts/components/Health Bar/healthBar.tscn" id="3_obtf8"]
 [ext_resource type="PackedScene" uid="uid://keoq6komxp2b" path="res://scenes/door/door.tscn" id="4_0tugg"]
+[ext_resource type="Script" uid="uid://dex3u30xcxvlu" path="res://scripts/components/Health Bar/health_bar.gd" id="4_ru2ip"]
 [ext_resource type="PackedScene" uid="uid://ck7n5le3va3ad" path="res://scenes/characters/cat.tscn" id="5_8v80i"]
 [ext_resource type="PackedScene" uid="uid://sfkxpy5k06d5" path="res://scenes/jail/jail.tscn" id="6_d8m87"]
 
@@ -292,7 +294,7 @@ transform = Transform3D(-0.019825634, 0, 0.9998034, 0, 1, 0, -0.9998034, 0, -0.0
 transform = Transform3D(-0.019825634, 0, 0.9998034, 0, 1, 0, -0.9998034, 0, -0.019825634, -36.79953, 1.0227307, -15.794376)
 
 [node name="HealthBar" parent="." unique_id=352033512 instance=ExtResource("3_obtf8")]
-script = null
+script = ExtResource("4_ru2ip")
 
 [node name="Door" parent="." unique_id=1466096162 instance=ExtResource("4_0tugg")]
 transform = Transform3D(2.134025, 0, 0, 0, 1.6184411, 0, 0, 0, 1.2890875, -0.54187715, 0.5037675, -6.2929716)
