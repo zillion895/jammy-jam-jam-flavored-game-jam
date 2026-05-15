@@ -60,7 +60,6 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6349092, 1.0227307, -4.922786)
 
 [node name="HealthBar" parent="." unique_id=352033512 instance=ExtResource("3_obtf8")]
-script = null
 
 [node name="Door" parent="." unique_id=1466096162 instance=ExtResource("4_0tugg")]
 transform = Transform3D(2.134025, 0, 0, 0, 1.6184411, 0, 0, 0, 1.2890875, -0.54187715, 0.5037675, -6.2929716)
