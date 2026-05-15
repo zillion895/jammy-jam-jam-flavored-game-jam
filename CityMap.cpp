@@ -1,5 +1,6 @@
 #include "CityMap.hpp"
 #include "Location.hpp"
+#include <algorithm>
 #include <cmath>
 #include <cstddef>
 #include <iostream>

@@ -1,0 +1,7 @@
+greedy search ended up finding the not optimal path ending up wasting 16 minutes in total witch woult indeed make the city mad
+with the time that it would add. the reason why is because it does not have the foresight to find the optimal path. it will always
+pick the path with the least cost, and then when it sees the goal it will go for it even though the route from industrial is far faster.
+
+djikstra will always find the most optimal path however, it will search out radially and waste a bunch of searches ending up wasting
+searces that it does not get it closer to the goal. A* fixes it with a hueristic function that will guide it towards the goal.
+this results in less wasted searches.
