@@ -11,9 +11,11 @@ public partial class Player : CharacterBody3D
     private float axisX;
     private float axisY;
     private Node3D cameraRoot;
+    private Node3D modelOrientation;
     public override void _Ready()
     {
         cameraRoot = GetNode<Node3D>("camRoot");
+        modelOrientation = GetNode<Node3D>("orientation");
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -42,6 +44,10 @@ public partial class Player : CharacterBody3D
         {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, CONVERGENCE_SPEED);
             velocity.Z = Mathf.MoveToward(Velocity.Z, 0, CONVERGENCE_SPEED);
+        }
+        //look in direction of movement
+        if (velocity.LengthSquared() > 0.01f)
+        {            modelOrientation.LookAt(GlobalPosition + velocity, Vector3.Up);
         }
         
 

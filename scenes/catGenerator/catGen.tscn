@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cno5ax05mnhte"]
+
+[ext_resource type="Script" uid="uid://bh8n28n4wx6xt" path="res://scenes/catGenerator/CatGen.cs" id="1_8h544"]
+
+[node name="CatGen" type="Node3D" unique_id=1409138416]
+script = ExtResource("1_8h544")

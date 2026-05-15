@@ -26,7 +26,7 @@ physics_material_override = SubResource("PhysicsMaterial_ev7rg")
 script = ExtResource("1_ev7rg")
 
 [node name="Cat" type="MeshInstance3D" parent="RigidBody3D" unique_id=310348476]
-transform = Transform3D(0.025, 0, 0, 0, -1.0927848e-09, 0.025, 0, -0.025, -1.0927848e-09, 0, -1, 0)
+transform = Transform3D(-0.025, 2.1855695e-09, 9.553427e-17, 0, -1.0927848e-09, 0.025, 2.1855695e-09, 0.025, 1.0927848e-09, 0, -1, 0)
 mesh = ExtResource("2_43gcw")
 surface_material_override/0 = SubResource("StandardMaterial3D_w70mx")
 

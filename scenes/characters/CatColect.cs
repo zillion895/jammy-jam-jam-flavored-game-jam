@@ -12,6 +12,7 @@ public partial class CatColect : RigidBody3D
 	private float minDistance = 4f;
 	private float machineMinDistance = 2f;
 	private float repelDistance = 2f;
+	private float ropeYOffset = 0.3f;
 	private MeshInstance3D ropeMesh;
 	private float directionChangeTimer = 0f;
 	private Vector3 currentRandomDir;
@@ -93,7 +94,7 @@ public partial class CatColect : RigidBody3D
 			float length = dir.Length();
 			if (length > 0.01f)
 			{
-				Vector3 mid = GlobalPosition + dir / 2;
+				Vector3 mid = GlobalPosition + dir / 2 + Vector3.Down * ropeYOffset;
 				ropeMesh.GlobalPosition = mid;
 
 				Vector3 forward = dir.Normalized();
@@ -174,7 +175,18 @@ public partial class CatColect : RigidBody3D
 					}
 				}
 			}
+			
 		}
+		//set player direction to velocity
+			if (LinearVelocity.LengthSquared() > 0.01f)
+			{
+				LookAt(GlobalPosition + LinearVelocity, Vector3.Up);
+			}
+			else if(player != null)
+			{
+				// If almost stationary, face the player
+				LookAt(player.GlobalPosition, Vector3.Up);
+			}
 	}
 
 	public void BreakRope()
