@@ -395,3 +395,5 @@ transform = Transform3D(1.7922139, 0, 0, 0, 1.6486049, 0, 0, 0, 1.9062152, -57.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1858447467]
 environment = SubResource("Environment_d8m87")
+
+[node name="ControlUi" parent="." unique_id=1262890706 instance=ExtResource("3_a0myi")]
